@@ -8,12 +8,22 @@ import { LoginComponent } from './Componentes/login/login.component';
 import { PrincipalComponent } from './Componentes/principal/principal.component';
 
 import {MatTabsModule} from '@angular/material/tabs';
+import { SubirArchivoComponent } from './Componentes/subir-archivo/subir-archivo.component';
+import { EditarArchivoComponent } from './Componentes/editar-archivo/editar-archivo.component';
+import { EliminarArchivoComponent } from './Componentes/eliminar-archivo/eliminar-archivo.component';
+import { AgregarAmigoComponent } from './Componentes/agregar-amigo/agregar-amigo.component';
+import { VerArchivosComponent } from './Componentes/ver-archivos/ver-archivos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    SubirArchivoComponent,
+    EditarArchivoComponent,
+    EliminarArchivoComponent,
+    AgregarAmigoComponent,
+    VerArchivosComponent
   ],
   imports: [
     BrowserModule,
