@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from 'src/app/Servicios/login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(public loginService:LoginService,
+              public _activatedRoute: ActivatedRoute,
+              public _router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,8 +26,12 @@ export class LoginComponent implements OnInit {
    Pass: string = '';
    Foto: string = '';
 
+   linkRouter: string ='';
 
-   async Login() {}
+   async Login() {
+     this.linkRouter='/User';
+     this._router.navigate([this.linkRouter,this.Usr]);
+   }
 
    async Registrar(){}
 

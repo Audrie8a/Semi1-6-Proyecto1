@@ -13,6 +13,10 @@ import { EditarArchivoComponent } from './Componentes/editar-archivo/editar-arch
 import { EliminarArchivoComponent } from './Componentes/eliminar-archivo/eliminar-archivo.component';
 import { AgregarAmigoComponent } from './Componentes/agregar-amigo/agregar-amigo.component';
 import { VerArchivosComponent } from './Componentes/ver-archivos/ver-archivos.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FormsModule } from '@angular/forms';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { VerArchivosComponent } from './Componentes/ver-archivos/ver-archivos.co
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatGridListModule,
+    FormsModule,
+    MatExpansionModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

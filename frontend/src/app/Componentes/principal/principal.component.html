@@ -1,11 +1,72 @@
-<mat-tab-group>
-    <mat-tab label="Subir Arhcivo" >
-        <app-subir-archivo></app-subir-archivo>
-    </mat-tab>
-    <mat-tab label= "Editar Archivo">
-        <app-editar-archivo></app-editar-archivo>
-    </mat-tab>
-    <mat-tab label= "Eliminar Archivo">
-        <app-eliminar-archivo></app-eliminar-archivo>
-    </mat-tab>
-</mat-tab-group>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>JOLC</title>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="principal.component.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+   
+    <!-- Masthead-->
+    <header class="p-4 mb-2 text-white text-center" id="portada">
+        <div class="container d-flex align-items-center flex-column">            
+            <div class="Imagen">
+                <img src="../../../assets/Img/descarga.png" alt="Paris" style="width:100%">
+            </div>
+        </div>
+    </header>
+    
+    <div class="text-light bg-secondary" >
+    <mat-tab-group mat-align-tabs="center" color="white">
+        <!--Subir Archivo-->
+        <mat-tab label="Subir Archivos">
+            <app-subir-archivo></app-subir-archivo>
+        </mat-tab>
+
+        <!--Editar Archivo-->
+        <mat-tab label="Editar Archivos">
+           <app-editar-archivo></app-editar-archivo>
+        </mat-tab>
+
+        <!--Eliminar Archivo-->
+        <mat-tab label="Eliminar Archivos">
+           <app-eliminar-archivo></app-eliminar-archivo>
+        </mat-tab>
+
+        <!--Ver Archivos-->
+        <mat-tab label="Ver Archivos">
+            <app-ver-archivos></app-ver-archivos>
+        </mat-tab>
+
+        <!--Agregar Amigos-->
+        <mat-tab label="Agregar Amigos">
+            <app-agregar-amigo></app-agregar-amigo>
+        </mat-tab>
+    </mat-tab-group>
+    </div>
+
+
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
+</html>

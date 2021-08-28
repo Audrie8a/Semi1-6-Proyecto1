@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+
+
 @Component({
   selector: 'app-agregar-amigo',
   templateUrl: './agregar-amigo.component.html',
@@ -11,5 +13,7 @@ export class AgregarAmigoComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  
 
 }
