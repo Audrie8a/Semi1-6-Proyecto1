@@ -6,24 +6,24 @@ const path = require('path')
 
 // define connection config for the database
 const dbServer ={
-    host: "basesemi1.cepyhb6hg4t6.us-east-2.rds.amazonaws.com",
+    host: "dbsemi1.cguv4wtarweb.us-east-2.rds.amazonaws.com", //MySQL Endpoint
     port: 3306,
     user: "admin",
-    password: "totito97gt",
-    database: "sys"
+    password: "Rodaudrie",
+    database: "Semi1"
 }
 // define connection config for the ssh tunnel
 const tunnelConfig = {
-    host: "ec2-18-221-141-131.us-east-2.compute.amazonaws.com",
+    host: "ec2-18-191-198-27.us-east-2.compute.amazonaws.com", //SSH Host
         port: 22,
         username:"ec2-user",
-        privateKey: fs.readFileSync(path.join(__dirname,'otrallave.pem'))
+        privateKey: fs.readFileSync(path.join(__dirname,'key1_RDS.pem'))
 }
 
 //Load Balancer: https://www.youtube.com/watch?v=0KIRNTbWf-4
 
 const forwardConfig = {
-    srcHost: '18.218.68.227', // any valid address
+    srcHost: '18.191.198.27', // any valid address
     srcPort: 3306, // any valid port
     dstHost: dbServer.host, // destination database
     dstPort: dbServer.port // destination port
