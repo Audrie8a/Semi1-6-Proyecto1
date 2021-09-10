@@ -14,7 +14,7 @@ const dbServer ={
 }
 // define connection config for the ssh tunnel
 const tunnelConfig = {
-    host: "ec2-18-221-180-77.us-east-2.compute.amazonaws.com", //SSH Host
+    host: "ec2-18-116-20-187.us-east-2.compute.amazonaws.com", //SSH Host
         port: 22,
         username:"ec2-user",
         privateKey: fs.readFileSync(path.join(__dirname,'key1_RDS.pem'))
