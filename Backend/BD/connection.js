@@ -23,7 +23,7 @@ const tunnelConfig = {
 //Load Balancer: https://www.youtube.com/watch?v=0KIRNTbWf-4
 
 const forwardConfig = {
-    srcHost: 'dbsemi1.cguv4wtarweb.us-east-2.rds.amazonaws.com', // any valid address
+    srcHost: '18.116.20.187', // any valid address
     srcPort: 3306, // any valid port
     dstHost: dbServer.host, // destination database
     dstPort: dbServer.port // destination port
