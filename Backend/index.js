@@ -1,4 +1,4 @@
-const login=require ('./routes/login.routes')
+//const login=require ('./routes/login.routes')
 const aws_keys= require('./Keys/creds')
 //const InicioRouter = require('./routes/inicio.routes');
 var express = require('express');
@@ -27,7 +27,7 @@ res.send("Bienvenido!")
 });
 
 //app.use("/",Login);
-app.use('/Inicio',login)
+//app.use('/Inicio',login)
 
 
 
