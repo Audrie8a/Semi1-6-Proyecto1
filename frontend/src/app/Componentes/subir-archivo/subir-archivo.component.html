@@ -1,1 +1,23 @@
-<p>subir-archivo works!</p>
+<div class="container">
+    <form>
+        <div class="UploadFile">
+            <label class="form-group" for="file">Select File
+                <img [src]="imageUrl" alter="Image Review" style="width: 350px; height: 350px;">
+            </label>
+            <input  class="form-group" 
+            type="file" id="file" 
+            accept="image/jpeg,image/gif,image/png,application/pdf,text/plain" 
+            hidden
+            #fileInput [(ngModel)]="Foto"
+            name="Foto"
+            (change)="onSelectNewFile()">
+        </div>
+
+
+        <label class="form-group">Nombre Archivo</label>
+        <input class="form-group" placeholder="Nombre Archivo">
+        <label class="form-group">Contraseña</label>
+        <input class="form-group" type="password" placeholder="Contraseña">
+        <button class="form-group" (click)="Cargar()">Cargar</button>
+    </form>
+</div>

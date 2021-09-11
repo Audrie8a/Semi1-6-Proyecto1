@@ -1,0 +1,19 @@
+.container{
+    height: 100%;
+    width: 800px;
+    align-self:center;
+    align-content: center;
+    margin-top: auto;
+    margin-bottom: auto;    
+    background-color: rgba(0,0,0,0.5) !important;    
+}
+
+.form-group{
+    align-self: center;
+    align-items: center;
+}
+.form-group label,input, button{
+    margin:10px;
+    display: block;
+    align-items: center;
+}
