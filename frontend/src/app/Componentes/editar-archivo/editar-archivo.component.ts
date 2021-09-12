@@ -10,6 +10,7 @@ export class EditarArchivoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('otro hooolaaaaaa');
   }
 
 }

@@ -1,1 +1,24 @@
 <p>subir-archivo works!</p>
+
+
+
+<!--<form #formLogin="ngForm" action="">-->
+    <input type="text" id="nombArch" name="nombArch" class="form-control" placeholder="Nombre de Archivo" [(ngModel)]="subir.nombre">
+    <br>
+    <input type="file" id="Archivo" name="Archivo" class="form-control" accept="application/pdf, image/*, text/plain">
+    <br>
+    <select id="lista" class="from-control" name="lista" [(ngModel)]="subir.estado">
+        <option value="1" selected>  
+            publico
+        </option>  
+        <option value="2">  
+            privado
+        </option>  
+    </select>
+    <br>
+    <br>
+    <button type="button" id="btnSubir" class="btn btn-primary btn-lg" (click)="probar()">Subir</button>
+<!--</form>-->
+
+
+

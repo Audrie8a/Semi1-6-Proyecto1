@@ -1,0 +1,53 @@
+#formulario{
+    background-color: blue;
+    width: 250px;
+    height: 530px;
+    position: absolute;
+    left: 50%;
+    margin-left: -150px;
+    top: 10%;
+    margin-top: -50px;
+}
+#silueta{
+    left: 50%;
+    margin-left: 13px;
+    margin-top: 10px;
+}
+#nombArch{
+    width: 225px;
+    margin-left: 575px;
+}
+#Archivo{
+    width: 425px;
+    margin-left: 475px;
+}
+#lista{
+    width: 225px;
+    margin-left: 575px;
+}
+#btnSubir{
+    margin-left: 625px;
+    background-color: skyblue;
+}
+#btnRegistro{
+    color: yellowgreen;
+    margin-left: 70px;
+}
+#btnRecuperar{
+    color: yellowgreen;
+    margin-left: 30px;
+}
+#cart{
+    background-color: blue;
+    height: 140px;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+#btnRec{
+    color: yellow;
+    margin-left: 50px;
+}
+#btnCan{
+    color: yellow;
+    margin-left: 55px;
+}
