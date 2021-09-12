@@ -20,6 +20,30 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors());
 
 
+app.post('/subirfoto', function (req, res) {
+
+  var id = req.body.id;
+  var foto = req.body.foto;
+  //carpeta y nombre que quieran darle a la imagen
+
+  var nombrei = "fotos/" + id + ".jpg";
+  //se convierte la base64 a bytes
+  let buff = new Buffer.from(foto, 'base64');
+
+  const params = {
+    Bucket: "appweb-6p1",
+    Key: nombrei,
+    Body: buff,
+    ContentType: "image",
+    ACL: 'public-read'
+  };
+  //const putResult = s3.putObject(params).promise();
+  //res.json({ mensaje: putResult })
+  console.log(id,foto)
+
+
+
+});
 
 
 

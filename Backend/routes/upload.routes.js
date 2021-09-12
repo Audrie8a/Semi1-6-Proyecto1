@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-//const upload= require("../controllers/upload.controller");
+const uploadA= require("../controllers/upload.controller");
 const aws_keys= require('../Keys/creds');
 const multer=require('multer');
 const upload= multer({dest:'images/'})
@@ -11,8 +11,10 @@ const upload= multer({dest:'images/'})
 router.post('/Upload',upload.single('file'),(req,res)=>{
     const file=req.file;
     if(file){
-        res.json(file);
+        console.log(file);
+        res.json("Archivo Cargado Correctamente!");
     }else{
+        res.json("Error al Cargar Archivo!")
         throw new error("Archivo no accesibel!");
     }
 })
@@ -35,4 +37,10 @@ function SubirFotoS3(id, foto){
 }
 
 
+router.post("/UploadA",uploadA.uploadArchivo);
+
 module.exports = router
+
+
+//Por si necesito convertir a base 64 en angular
+//https://www.youtube.com/watch?v=mjRkmZSXkz4
