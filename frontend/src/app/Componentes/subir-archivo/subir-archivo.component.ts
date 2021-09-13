@@ -54,7 +54,14 @@ export class SubirArchivoComponent implements OnInit {
       alert("Subiendo Imagen!");
       let arryaAux=this.base64.split(",",2)
       this.base64=arryaAux[1];
-      this.subirArchivoService.CargarArchivo("Archivo",this.base64);
+      if(this.fileSelected?.type=="application/pdf"){
+        //Colocar metodo pdf
+      }else if (this.fileSelected?.type=="text/plain"){
+        //Colocar metodo texto
+      }else{
+        this.subirArchivoService.CargarImagen("Archivo",this.base64);
+      }
+      
     }
         
   }
