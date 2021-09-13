@@ -12,7 +12,7 @@ const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 var bodyParser = require('body-parser');
 var app = express();
 const cors = require('cors');
-var uuid = require('uuid');
+const { uuid } = require('uuidv4');
 var corsOptions = { origin: true, optionsSuccessStatus: 200 };
 app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: '10mb', extended: true }));
