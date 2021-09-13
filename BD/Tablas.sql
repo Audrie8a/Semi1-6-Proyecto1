@@ -1,27 +1,19 @@
-create database Semi1;
-
-use  Semi1;
-
-create table Prueba(
-	Nombre Varchar(50)
-);
-
-insert into Prueba values ("Audrie");
-insert into Prueba values("Annelisse");
-select * from Prueba;
+use Semi1;
+select * from usuario;
+insert into usuario values(0,"Audrie","Audrie8a","ann.audrie8a@gmail.com","Rodaudrie","Foto");
 
 create table usuario(
 	idUser int not null auto_increment primary key,
 	nombre varchar(40),
-	usuario varchar(16),
+	usuario varchar(16) unique,
 	correo varchar(35),
-	contra varchar(16),
+	contra varchar(50),
 	foto varchar(300)
 );
 
 create table archivo(
 	idArchivo int not null auto_increment primary key,
-	nombreArch varchar(30),
+	nombreArch varchar(300),
 	Arch varchar(300),
 	Estado int,
 	idUsu int,
@@ -38,5 +30,4 @@ create table Amigo(
 	CONSTRAINT fk_usu2 FOREIGN KEY (user2)
         REFERENCES usuario (idUser)
 );
-
 

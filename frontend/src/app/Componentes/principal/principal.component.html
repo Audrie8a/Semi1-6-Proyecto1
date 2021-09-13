@@ -22,7 +22,8 @@
     <header class="p-4 mb-2 text-white text-center" id="portada">
         <div class="container d-flex align-items-center flex-column">            
             <div class="Imagen">
-                <img src="../../../assets/Img/descarga.png" alt="Paris" style="width:100%">
+                <img [src]="ImgUrl" alt="Paris" >
+                <button (click)="cargarDatos()">Cargar</button>
             </div>
         </div>
     </header>

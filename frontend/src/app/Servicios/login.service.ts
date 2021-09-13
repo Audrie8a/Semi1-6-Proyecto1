@@ -15,9 +15,16 @@ export class LoginService {
     return this.httpClient.post(ruta,data).toPromise();
 
   }
-  Registrar(Nombre:string,Usuario:string,Correo:string,Password:string,idFoto:string ){
+  Registrar(Usuario:string,Nombre:string,Correo:string,Password:string,idFoto:string ){
     const ruta= this.url+"Inicio/registro";
     const data ={Nombre,Usuario,Correo,Password,idFoto};
+    return this.httpClient.post(ruta,data).toPromise();
+
+  }
+
+  CargarImagen( id:string|null, foto: string ){
+    const ruta = this.url+"subirfoto";
+    const data= {id,foto};
     return this.httpClient.post(ruta,data).toPromise();
 
   }
