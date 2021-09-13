@@ -15,7 +15,8 @@ export class SubirArchivoComponent implements OnInit {
   base64: string="Base64...";
   fileSelected?:Blob;
   imageUrl?:string;
-    
+  Nombre: string="";
+
   @ViewChild('fileInput',{static:false}) fileInput!: ElementRef;  
   constructor(private sant:DomSanitizer,
     public subirArchivoService:SubirArchivoService ,
@@ -59,7 +60,7 @@ export class SubirArchivoComponent implements OnInit {
       }else if (this.fileSelected?.type=="text/plain"){
         //Colocar metodo texto
       }else{
-        this.subirArchivoService.CargarImagen("Archivo",this.base64);
+        this.subirArchivoService.CargarImagen(this.Nombre,this.base64);
       }
       
     }

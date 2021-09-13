@@ -47,9 +47,6 @@ app.post('/subirfoto', function (req, res) {
   const putResult = s3.putObject(params).promise();
   res.json({ mensaje: putResult })
   //console.log(id,foto)
-
-
-
 });
 
 
