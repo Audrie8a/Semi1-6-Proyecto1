@@ -73,14 +73,7 @@ exports.Prueba = async (req, res) => {
                         //de bytes a base64
                         var dataBase64 = Buffer.from(data.Body).toString('base64');
                         result[0].foto=dataBase64;
-                        let dataUserSchema = {
-                            "idUser": String(result[0].idUser),
-                            "nombre": String(result[0].nombre),
-                            "usuario": String(result[0].usuario),
-                            "correo": String(result[0].correo),
-                            "contra": String(result[0].contra),
-                            "foto": String(result[0].foto)
-                        }
+                        
                         
                         return res.json(result[0]);
                     

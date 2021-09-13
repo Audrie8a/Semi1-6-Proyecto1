@@ -10,7 +10,7 @@ import { SubirArchivoService } from 'src/app/Servicios/subir-archivo.service';
 })
 export class SubirArchivoComponent implements OnInit {
   Foto: string = '';
-
+  idUsuarioGlobal:string|null='';
 
   base64: string="Base64...";
   fileSelected?:Blob;
@@ -23,6 +23,8 @@ export class SubirArchivoComponent implements OnInit {
     public _router: Router) { }
 
   ngOnInit(): void {
+    let usuario=this._activatedRoute.snapshot.paramMap.get("id");
+    this.idUsuarioGlobal=usuario;
   }
 
   Cargar(){

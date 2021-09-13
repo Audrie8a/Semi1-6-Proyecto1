@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-ver-archivos',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ver-archivos.component.css']
 })
 export class VerArchivosComponent implements OnInit {
-
-  constructor() { }
+  idUsuarioGlobal:string | null="";
+  constructor(
+    public _routre:Router,
+    public route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    let usuario=this.route.snapshot.paramMap.get("id");
+    this.idUsuarioGlobal=usuario;
   }
 
 }
