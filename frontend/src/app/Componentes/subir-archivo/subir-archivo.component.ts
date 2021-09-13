@@ -45,17 +45,20 @@ export class SubirArchivoComponent implements OnInit {
     this.fileSelected= this.fileInput.nativeElement.files[0];
     const imageBlob=this.fileInput.nativeElement.files[0];
     this.imageUrl=this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+    
     //alert(imageBlob);    
     const file = new FormData();
     file.set('file', imageBlob);
+    
     this.convertFileToBase64();
+    
     if (this.base64!="Base64..."){
       alert("Subiendo Imagen!");
       let arryaAux=this.base64.split(",",2)
       this.base64=arryaAux[1];
       console.log(this.base64);
       //this.subirArchivoService.saveImagen(file);
-      this.subirArchivoService.CargarArchivo("Archivo",this.base64);
+      //this.subirArchivoService.CargarArchivo("Archivo",this.base64);
     }
     
     

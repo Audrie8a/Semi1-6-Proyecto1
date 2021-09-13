@@ -16,7 +16,7 @@ export class SubirArchivoService {
   }
 
   CargarArchivo( id:string, foto: string ){
-    const ruta = this.url+"Archivo/UploadA";
+    const ruta = this.url+"subirfoto";
     const data= {id,foto};
     return this.httpClient.post(ruta,data).toPromise();
 

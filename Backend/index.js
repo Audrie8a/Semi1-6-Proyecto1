@@ -1,4 +1,4 @@
-//const login=require ('./routes/login.routes')
+const login=require ('./routes/login.routes')
 const aws_keys= require('./Keys/creds');
 const SubirImagen=require('./routes/upload.routes');
 //const InicioRouter = require('./routes/inicio.routes');
@@ -19,6 +19,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors());
 
+//instanciamos el sdk
+//var AWS = require('aws-sdk');
+//const s3 = new AWS.S3(aws_keys.s3);
 
 app.post('/subirfoto', function (req, res) {
 
@@ -57,7 +60,7 @@ res.send("Bienvenido!")
 app.use('/Archivo',SubirImagen);
 
 //app.use("/",login);
-//app.use('/Inicio',login)
+app.use('/Inicio',login)
 
 
 
