@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/Servicios/login.service';
 
@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/Servicios/login.service';
 })
 export class LoginComponent implements OnInit {
 
+  @ViewChild('fileInput',{static:false}) fileInput!: ElementRef;
   constructor(public loginService:LoginService,
               public _activatedRoute: ActivatedRoute,
               public _router: Router) { }
@@ -46,7 +47,9 @@ export class LoginComponent implements OnInit {
      
    }
 
-   async Registrar(){}
+   async Registrar(){
+
+   }
 
     borrarRegistro(){
       this.Usuario='';

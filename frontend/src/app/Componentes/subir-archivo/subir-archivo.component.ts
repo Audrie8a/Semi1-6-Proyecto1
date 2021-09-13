@@ -46,9 +46,7 @@ export class SubirArchivoComponent implements OnInit {
     const imageBlob=this.fileInput.nativeElement.files[0];
     this.imageUrl=this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
     
-    //alert(imageBlob);    
-    const file = new FormData();
-    file.set('file', imageBlob);
+    
     
     this.convertFileToBase64();
     
@@ -56,14 +54,12 @@ export class SubirArchivoComponent implements OnInit {
       alert("Subiendo Imagen!");
       let arryaAux=this.base64.split(",",2)
       this.base64=arryaAux[1];
-      console.log(this.base64);
-      //this.subirArchivoService.saveImagen(file);
-      //this.subirArchivoService.CargarArchivo("Archivo",this.base64);
+      this.subirArchivoService.CargarArchivo("Archivo",this.base64);
     }
-    
-    
+        
   }
 
+  
   convertFileToBase64(){
     let reader= new FileReader();
     reader.readAsDataURL(this.fileSelected as Blob);
