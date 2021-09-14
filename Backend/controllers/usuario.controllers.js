@@ -79,6 +79,333 @@ exports.Prueba = async (req, res) => {
     }
 }
 
+exports.manageFriends =async(req,res)=>{
+    try {
+       const {user1, user2, tipo}= req.body
+       let sql = "";
+       if(tipo==1){ //Eliminar o rechazar Amigo
+           sql=`delete from Amigo where user1 =${user1} and user2=${user2} or user1=${user2} and user2=${user1}`;
+       }else if (tipo==0){// Aceptar solicitud
+           sql=`update Amigo SET estado=0 where user1=${user1} and user2=${user2} or user1=${user2} and user2=${user1}`;
+       }else { //Enviar solicitud
+           sql=`insert into Amigo values(${user1},${user2},2)`;
+       }
+       
+
+       const conn = bd.SSHConnection.then(conn => {
+          
+           conn.query(sql, function (err, result) {
+               if (err) throw err;
+               
+               res.json("Acción ejecutada correctamente!");
+             });
+       })
+       
+    } catch (error) {
+        console.log("Error al ejecutar acción Amigo  => ", error)
+        res.json("error")
+    }
+}
+
+
+exports.getSugerencias =async(req,res)=>{
+    try {
+        const {idUser, Usuario, tipo}= req.body
+        let sql ="";
+        if(tipo==0){//Obtener Sugerencias
+            sql= `select idUser, nombre, usuario, correo, contra, foto from usuario as u
+                where idUser not in 
+                (select user1 from Amigo
+                where user2=${idUser})
+                and idUser not in 
+                (select user2 from Amigo
+                where user1=${idUser})
+                and idUser!=${idUser}
+                `;
+        }else{//Obtener Sugerencias Filtrado
+            sql= `select idUser, nombre, usuario, correo, contra, foto from usuario as u
+                where idUser not in 
+                (select user1 from Amigo
+                where user2=${idUser})
+                and idUser not in 
+                (select user2 from Amigo
+                where user1=${idUser})
+                and idUser!=${idUser}
+                and u.usuario="${Usuario}"
+                `;
+        }
+ 
+        console.log(sql)
+       
+       const conn = bd.SSHConnection.then(conn => {
+           //hacemos la query normal.
+           
+           conn.query(sql, function (err, result) {
+               if (err) throw err;
+               
+               if(result.length!=0){
+                    let Amigos = [];
+                    let Amigo ={
+                        "idUser": "",
+                        "nombre": "",
+                        "usuario": "",
+                        "correo": "",
+                        "contra": "",
+                        "foto": "",
+                        "archivos": ""
+                    }
+                    Usuarios="(";
+                    Amigos = result.map(x=> {
+                        Amigo={
+                            idUser: x.idUser,
+                            nombre: x.nombre,
+                            usuario: x.usuario,
+                            correo: x.correo,
+                            contra: x.contra,
+                            foto: "https://appweb-6p1.s3.us-east-2.amazonaws.com/"+x.foto,
+                            archivos: ""
+                        }
+                        Usuarios+=x.idUser+",";
+                        return Amigo;
+                    });
+                    Usuarios+="0)";
+                    let sql2=`select count(*) as Total from archivo where idUsu in ${Usuarios} and Estado=1`
+                    console.log(sql2);
+                    conn.query(sql2, function (err2, result2) {
+                        if (err2) throw err2;
+                        
+                        let Aux=[]
+                        contador=0;
+                             Aux = result2.map(x=> {
+                                 Amigo={
+                                     idUser: Amigos[contador].idUser,
+                                     nombre: Amigos[contador].nombre,
+                                     usuario: Amigos[contador].usuario,
+                                     correo: Amigos[contador].correo,
+                                     contra: Amigos[contador].contra,
+                                     foto: Amigos[contador].foto,
+                                     archivos: x.Total
+                                 }
+                                 Amigos[contador]=Amigo;
+                                 contador++;
+                                 
+                                 return Amigo;
+                             });   
+                             return res.json(Amigos);            
+                      });
+                                      
+               }else{
+                   //No hay sugerencias que mostrar
+                   return res.json("false");
+               }                
+             });
+   
+          
+       })
+       
+       
+    } catch (error) {
+        console.log("Error al obtener Sugerencias  => ", error)
+        res.json("error")
+    }
+}
+
+exports.getAmigos =async(req,res)=>{
+    try {
+       const {idUser, Usuario, tipo}= req.body
+       console.log(Usuario);
+       let sql ="";
+       if(tipo==0){//Obtener Amigos
+            sql= `select idUser, nombre, usuario, correo, contra, foto from usuario as u
+            where idUser in 
+            (select user1 from Amigo
+            where user2=${idUser}
+            and estado=0)
+            or idUser in 
+            (select user2 from Amigo
+            where user1=${idUser}
+            and estado=0)
+            `;
+       }else{//Obtener Amigos Filtrado
+            sql= `select idUser, nombre, usuario, correo, contra, foto from usuario as u
+            where idUser in 
+            (select user1 from Amigo
+            where user2=${idUser}
+            and estado=0)
+            and idUser in 
+            (select user2 from Amigo
+            where user1=${idUser}
+            and estado=0)
+            or usuario="${Usuario}"
+            `;
+       }
+       
+       console.log(sql);
+       
+       const conn = bd.SSHConnection.then(conn => {
+           //hacemos la query normal.
+           
+           conn.query(sql, function (err, result) {
+               if (err) throw err;
+               
+               if(result.length!=0){
+                let Amigos = [];
+                let Amigo ={
+                    "idUser": "",
+                    "nombre": "",
+                    "usuario": "",
+                    "correo": "",
+                    "contra": "",
+                    "foto": "",
+                    "archivos": ""
+                }
+                Usuarios="(";
+                Amigos = result.map(x=> {
+                    Amigo={
+                        idUser: x.idUser,
+                        nombre: x.nombre,
+                        usuario: x.usuario,
+                        correo: x.correo,
+                        contra: x.contra,
+                        foto: "https://appweb-6p1.s3.us-east-2.amazonaws.com/"+x.foto,
+                        archivos: ""
+                    }
+                    Usuarios+=x.idUser+",";
+                    return Amigo;
+                });
+                Usuarios+="0)";
+                let sql2=`select count(*) as Total from archivo where idUsu in ${Usuarios} and Estado=1`
+                console.log(sql2);
+                conn.query(sql2, function (err2, result2) {
+                    if (err2) throw err2;
+                    
+                    let Aux=[]
+                    contador=0;
+                         Aux = result2.map(x=> {
+                             Amigo={
+                                 idUser: Amigos[contador].idUser,
+                                 nombre: Amigos[contador].nombre,
+                                 usuario: Amigos[contador].usuario,
+                                 correo: Amigos[contador].correo,
+                                 contra: Amigos[contador].contra,
+                                 foto: Amigos[contador].foto,
+                                 archivos: x.Total
+                             }
+                             Amigos[contador]=Amigo;
+                             contador++;
+                             
+                             return Amigo;
+                         });   
+                         return res.json(Amigos);            
+                  });
+                                  
+           }else{
+               //No hay sugerencias que mostrar
+               return res.json("false");
+           }                
+         });
+   
+          
+       })
+       
+       
+    } catch (error) {
+        console.log("Error al obtener Sugerencias  => ", error)
+        res.json("error")
+    }
+}
+
+exports.getSolicitudes =async(req,res)=>{
+    try {
+        const {idUser, Usuario, tipo}= req.body
+        let sql ="";
+        if(tipo==0){//Obtener Solicitudes
+            sql = `select idUser, nombre, usuario, correo, contra, foto from usuario, Amigo
+            where user1=idUser
+            and user2=${idUser}
+            and estado=2
+            `;
+        }else{
+            sql = `select idUser, nombre, usuario, correo, contra, foto from usuario, Amigo
+            where user1=idUser
+            and user2=${idUser}
+            and estado=2
+            and usuario="${Usuario}"`;
+        }
+
+        console.log(sql);
+       const conn = bd.SSHConnection.then(conn => {
+           //hacemos la query normal.
+           
+           conn.query(sql, function (err, result) {
+               if (err) throw err;
+               
+               if(result.length!=0){
+                let Amigos = [];
+                let Amigo ={
+                    "idUser": "",
+                    "nombre": "",
+                    "usuario": "",
+                    "correo": "",
+                    "contra": "",
+                    "foto": "",
+                    "archivos": ""
+                }
+                Usuarios="(";
+                Amigos = result.map(x=> {
+                    Amigo={
+                        idUser: x.idUser,
+                        nombre: x.nombre,
+                        usuario: x.usuario,
+                        correo: x.correo,
+                        contra: x.contra,
+                        foto: "https://appweb-6p1.s3.us-east-2.amazonaws.com/"+x.foto,
+                        archivos: ""
+                    }
+                    Usuarios+=x.idUser+",";
+                    return Amigo;
+                });
+                Usuarios+="0)";
+                let sql2=`select count(*) as Total from archivo where idUsu in ${Usuarios} and Estado=1`
+                console.log(sql2);
+                conn.query(sql2, function (err2, result2) {
+                    if (err2) throw err2;
+                    
+                    let Aux=[]
+                    contador=0;
+                         Aux = result2.map(x=> {
+                             Amigo={
+                                 idUser: Amigos[contador].idUser,
+                                 nombre: Amigos[contador].nombre,
+                                 usuario: Amigos[contador].usuario,
+                                 correo: Amigos[contador].correo,
+                                 contra: Amigos[contador].contra,
+                                 foto: Amigos[contador].foto,
+                                 archivos: x.Total
+                             }
+                             Amigos[contador]=Amigo;
+                             contador++;
+                             
+                             return Amigo;
+                         });   
+                         return res.json(Amigos);            
+                  });
+                                  
+           }else{
+               //No hay sugerencias que mostrar
+               return res.json("false");
+           }                
+         });
+   
+          
+       })
+       
+       
+    } catch (error) {
+        console.log("Error al obtener Sugerencias  => ", error)
+        res.json("error")
+    }
+}
 
  exports.registro =async(req,res)=>{
     try {

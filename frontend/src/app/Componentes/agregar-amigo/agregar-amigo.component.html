@@ -11,43 +11,30 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <input matInput class="Filtro" placeholder="Filtrar">
-            <button class="Botones">Filtrar</button>
-            <button class="Botones">Borrar Filtros</button>
-            <br> <br> <br>
-            <mat-card class='FondoPublicacion'>
+            <input matInput [(ngModel)]="Filtro1" name="Filtro1" class="Filtro" placeholder="Filtrar">
+            <button class="Botones" (click)="getAmigos(Filtro1,1)">Filtrar</button>
+            <button class="Botones" (click)="getAmigos(Filtro1,0)">Borrar Filtros</button>
+            <br>
+            <label class="Anuncio">{{Anuncio1}}</label>
+             
+            <mat-card *ngFor="let amigo of Amigos" class='FondoPublicacion'>
+                
                 <mat-card-header>
-                    <mat-card-title>Usuario</mat-card-title>
+                    <mat-card-title>{{amigo.usuario}}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                     <div class="Imagen">
-                        <img mat-card-image src="../../../assets/Img/Avatar2.png">
+                        <img mat-card-image src="{{amigo.foto}}">
+                        <br>
+                        <label>Archivos Publicados: {{amigo.archivos}}</label>
                     </div>
                 </mat-card-content>
                 
                 <mat-card-actions>
-                    <button mat-button class="Botones2">Eliminar</button>
+                    <button mat-button class="Botones2" (click)="adminFriends(amigo.idUser,1)">Eliminar</button>
                 </mat-card-actions>
 
             </mat-card>
-
-            <mat-card class='FondoPublicacion'>
-                <mat-card-header>
-                    <mat-card-title>Usuario</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="Imagen">
-                        <img mat-card-image src="../../../assets/Img/Avatar5.png">
-                    </div>
-                </mat-card-content>
-                
-                
-                <mat-card-actions>
-                    <button mat-button class="Botones2">Eliminar</button>
-                </mat-card-actions>
-
-            </mat-card>
-
         </mat-expansion-panel>
 
         <!--SECCIÓN DE SUGERENCIAS-->
@@ -61,43 +48,30 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <input matInput class="Filtro" placeholder="Filtrar">
-            <button class="Botones">Filtrar</button>
-            <button class="Botones">Borrar Filtros</button>
-            <br> <br> <br>
-            <mat-card class='FondoPublicacion'>
+            <input matInput matInput [(ngModel)]="Filtro2" name="Filtro2" class="Filtro" placeholder="Filtrar">
+            <button class="Botones" (click)="getSugerencias(Filtro2,1)">Filtrar</button>
+            <button class="Botones" (click)="getSugerencias(Filtro2,0)">Borrar Filtros</button>
+            <br> 
+            <label class="Anuncio">{{Anuncio2}}</label>
+             
+            <mat-card *ngFor="let sugerencia of Sugerencias"class='FondoPublicacion'>
+                
                 <mat-card-header>
-                    <mat-card-title>Usuario</mat-card-title>
+                    <mat-card-title>{{sugerencia.usuario}}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                     <div class="Imagen">
-                        <img mat-card-image src="../../../assets/Img/Avatar3.png">
+                        <img mat-card-image src="{{sugerencia.foto}}">
+                        <br>
+                        <label>Archivos Publicados: {{sugerencia.archivos}}</label>
                     </div>
                 </mat-card-content>
                 
                 <mat-card-actions>
-                    <button mat-button class="Botones2">Eliminar</button>
+                    <button mat-button class="Botones2"  (click)="adminFriends(sugerencia.idUser,2)">Agregar</button>
                 </mat-card-actions>
 
             </mat-card>
-
-            <mat-card class='FondoPublicacion'>
-                <mat-card-header>
-                    <mat-card-title>Usuario</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="Imagen">
-                        <img mat-card-image src="../../../assets/Img/Avatar4.png">
-                    </div>
-                </mat-card-content>
-                
-                
-                <mat-card-actions>
-                    <button mat-button class="Botones2">Agregar</button>
-                </mat-card-actions>
-
-            </mat-card>
-
         </mat-expansion-panel>
 
         <!--SECCIÓN SOLICICITUDES-->
@@ -111,41 +85,28 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <input matInput class="Filtro" placeholder="Filtrar">
-            <button class="Botones">Filtrar</button>
-            <button class="Botones">Borrar Filtros</button>
-            <br> <br> <br>
-            <mat-card class='FondoPublicacion'>
+            <input matInput [(ngModel)]="Filtro3" name="Filtro3"  class="Filtro" placeholder="Filtrar">
+            <button class="Botones" (click)="getSolicitudes(Filtro3,1)">Filtrar</button>
+            <button class="Botones" (click)="getSolicitudes(Filtro3,0)">Borrar Filtros</button>
+            <br> 
+            <label class="Anuncio">{{Anuncio3}}</label>
+            
+            <mat-card *ngFor="let solicitud of Solicitudes" class='FondoPublicacion'>
+                
                 <mat-card-header>
-                    <mat-card-title>Usuario</mat-card-title>
+                    <mat-card-title>{{solicitud.usuario}}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                     <div class="Imagen">
-                        <img mat-card-image src="../../../assets/Img/Avatar3.png">
+                        <img mat-card-image src="{{solicitud.foto}}">
+                        <br>
+                        <label>Archivos Publicados: {{solicitud.archivos}}</label>
                     </div>
                 </mat-card-content>
                 
                 <mat-card-actions>
-                    <button mat-button class="Botones2">Aceptar</button>
-                    <button mat-button class="Botones2">Rechazar</button>
-                </mat-card-actions>
-
-            </mat-card>
-
-            <mat-card class='FondoPublicacion'>
-                <mat-card-header>
-                    <mat-card-title>Usuario</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="Imagen">
-                        <img mat-card-image src="../../../assets/Img/Avatar4.png">
-                    </div>
-                </mat-card-content>
-                
-                
-                <mat-card-actions>
-                    <button mat-button class="Botones2">Aceptar</button>
-                    <button mat-button class="Botones2">Rechazar</button>
+                    <button mat-button class="Botones2" (click)="adminFriends(solicitud.idUser,0)">Aceptar</button>
+                    <button mat-button class="Botones2"  (click)="adminFriends(solicitud.idUser,1)">Rechazar</button>
                 </mat-card-actions>
 
             </mat-card>

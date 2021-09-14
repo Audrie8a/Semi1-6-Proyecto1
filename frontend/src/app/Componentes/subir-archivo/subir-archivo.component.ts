@@ -14,7 +14,7 @@ export class SubirArchivoComponent implements OnInit {
 
   base64: string="Base64...";
   fileSelected?:Blob;
-  imageUrl?:string;
+  imageUrl?:string='../../../assets/Img/Inicio.png';
     
   @ViewChild('fileInput',{static:false}) fileInput!: ElementRef;  
   constructor(private sant:DomSanitizer,

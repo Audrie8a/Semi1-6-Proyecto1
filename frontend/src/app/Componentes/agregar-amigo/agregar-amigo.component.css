@@ -62,6 +62,19 @@
     border-color: rgb(201, 210, 214);
     border-style: solid;
   }
+  
+  .Imagen label{
+    margin-top: 20px;
+    color: aliceblue;
+    font-family: sans-serif;
+  }
+  .Anuncio {
+    text-align: center; 
+    font-family: Arial; 
+    font-size: 30px; 
+    COLOR: #0e202c; 
+    text-shadow: 0px 0px 9px #0d1f36;
+  }
 
   .mat-expansion-panel-header.mat-expanded:focus {
     background: rgb(54,54,93);

@@ -8,14 +8,18 @@ insert into usuario values(0,"Anne","Anne8a","anne8a@gmail.com","Rodaudrie","Fot
 
 
 -- Mostrar sugerencias
-select idUser, nombre, usuario, correo, contra, foto from usuario as u
-where idUser not in 
+select u.idUser, u.nombre, u.usuario, u.correo, u.contra, u.foto from usuario as u 
+where  u.idUser not in 
 (select user1 from Amigo
-where user2=1)
-and idUser not in 
+where user2=2)
+and u.idUser not in 
 (select user2 from Amigo
-where user1=1)
-and idUser!=1;
+where user1=2)
+and u.idUser!=2
+and u.usuario="Rod8a";
+
+select * from archivo;
+select count(*) as Total from archivo where idUsu in (3,4,5,7,8,0) and Estado=1;
 
 -- Mostrar Amigos
 select idUser, nombre, usuario, correo, contra, foto from usuario as u
@@ -26,7 +30,8 @@ and estado=0)
 or idUser in 
 (select user2 from Amigo
 where user1=1
-and estado=0);
+and estado=0)
+;
 
 -- Mis Solicitudes
 select idUser, nombre, usuario, correo, contra, foto from usuario, Amigo
@@ -44,9 +49,24 @@ insert into Amigo values(5,1,2); -- Alejandor a Audrie
 -- Solicitud de Amistad aprobada
 insert into Amigo values(1,3,0); -- Audrie a Rodrigo
 insert into Amigo values(1,7,0); -- Audrie a Johanna
+insert into archivo values(0,"Prueba","...",0,1);
 
 
-delete from Amigo where user1 =5;
+select idUser, nombre, usuario, correo, contra, foto from usuario as u
+            where usuario in
+            (select user1 from Amigo
+            where user2=1
+            and estado=0)
+            and idUser in
+            (select user2 from Amigo
+            where user1=1
+            and estado=0)
+            or usuario="Toto";
+
+
+select * from Amigo;
+delete from Amigo where user1 =5 and user2=1;
+update Amigo SET estado=0 where user1=5 and user2= 1;
 create table usuario(
 	idUser int not null auto_increment primary key,
 	nombre varchar(40),
