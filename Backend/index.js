@@ -34,7 +34,7 @@ app.post('/subirfoto', function (req, res) {
   var foto = req.body.foto;
   //carpeta y nombre que quieran darle a la imagen
 
-  var nombrei = "fotos/" + id +uuid()+ ".jpg";
+  var nombrei = "fotos/" + id +uuid()+ ".pdf";
   //se convierte la base64 a bytes
   let buff = new Buffer.from(foto, 'base64');
   const params = {
@@ -48,6 +48,34 @@ app.post('/subirfoto', function (req, res) {
   res.json({ mensaje: putResult })
   //console.log(id,foto)
 
+
+
+});
+
+//subir pdf en s3
+app.post('/subirfile', function (req, res) {
+
+  var nombre = req.body.nombre;
+  var pdf = req.body.pdf;  //base 64
+  //carpeta y nombre que quieran darle al pdf
+  var nombrei = "files/" + nombre +uuid()+ ".pdf";
+  //se convierte la base64 a bytes
+  let buff = new Buffer.from(pdf, 'base64');
+  const params = {
+    Bucket: "appweb-6p1",
+    Key: nombrei,
+    Body: buff,
+    ACL: 'public-read'
+  };
+
+  s3.upload(params, function sync(err, data) {
+     if (err) {
+       res.status(500).send(err)
+     } else {
+      console.log(data.Location);  
+      res.status(200).send(data);
+                        
+   }}); 
 
 
 });

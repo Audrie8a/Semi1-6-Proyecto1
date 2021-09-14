@@ -46,7 +46,14 @@ export class SubirArchivoComponent implements OnInit {
   onFileUpload(){    
     this.fileSelected= this.fileInput.nativeElement.files[0];
     const imageBlob=this.fileInput.nativeElement.files[0];
-    this.imageUrl=this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+    if(this.fileSelected?.type=="application/pdf"){
+      this.imageUrl='../../../assets/Img/PDF.png';
+    }else if (this.fileSelected?.type=="text/plain"){
+      this.imageUrl='../../../assets/Img/Texto.png'
+    }else{
+      this.imageUrl=this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+    }
+    
     
     
     
@@ -58,6 +65,7 @@ export class SubirArchivoComponent implements OnInit {
       this.base64=arryaAux[1];
       if(this.fileSelected?.type=="application/pdf"){
         //Colocar metodo pdf
+        this.subirArchivoService.CargarPdf("ArchivoPdfAudrie",this.base64);
       }else if (this.fileSelected?.type=="text/plain"){
         //Colocar metodo texto
       }else{

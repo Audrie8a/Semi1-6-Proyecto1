@@ -16,4 +16,10 @@ export class SubirArchivoService {
     return this.httpClient.post(ruta,data).toPromise();
 
   }
+  CargarPdf( nombre:string, pdf: string ){
+    const ruta = this.url+"subirfile";
+    const data= {nombre,pdf};
+    return this.httpClient.post(ruta,data).toPromise();
+
+  }
 }
