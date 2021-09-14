@@ -1,24 +1,27 @@
-<p>subir-archivo works!</p>
-
-
-
-<!--<form #formLogin="ngForm" action="">-->
-    <input type="text" id="nombArch" name="nombArch" class="form-control" placeholder="Nombre de Archivo" [(ngModel)]="subir.nombre">
-    <br>
-    <input type="file" id="Archivo" name="Archivo" class="form-control" accept="application/pdf, image/*, text/plain">
-    <br>
-    <select id="lista" class="from-control" name="lista" [(ngModel)]="subir.estado">
-        <option value="1" selected>  
-            publico
-        </option>  
-        <option value="2">  
-            privado
-        </option>  
-    </select>
-    <br>
-    <br>
-    <button type="button" id="btnSubir" class="btn btn-primary btn-lg" (click)="probar()">Subir</button>
-<!--</form>-->
-
-
-
+<div class="container">
+    <form>
+        <div class="UploadFile">
+            <label class="form-group" for="file">Select File
+                <img [src]="imageUrl" alter="Image Review" style="width: 350px; height: 350px;">
+            </label>
+            <input  class="form-group" 
+            type="file" id="file" 
+            accept="image/jpeg,image/gif,image/png,application/pdf,text/plain" 
+            hidden
+            #fileInput [(ngModel)]="Foto"
+            name="Foto"
+            (change)="onSelectNewFile()">
+        </div>
+        <input name="archivo" [(ngModel)]="archivo" class="form-group" placeholder="Nombre Archivo" >
+        <select id="lista" name="lista" class="form-group" [(ngModel)]="estado">
+            <option value="1">  
+                Publico
+            </option>
+            <option value="0">  
+                Privado
+            </option> 
+        </select>
+        <input name="contra" [(ngModel)]="contra" class="form-group" type="password" placeholder="Contraseña">
+        <input type="submit" value="Cargar"(click)="Cargar()" class="form-group">
+    </form>
+</div>

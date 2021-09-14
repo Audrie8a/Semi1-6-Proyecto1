@@ -14,13 +14,16 @@ const dbServer ={
 }
 // define connection config for the ssh tunnel
 const tunnelConfig = {
-    host: "ec2-3-137-41-108.us-east-2.compute.amazonaws.com", //SSH Host
+    host: "ec2-3-142-124-186.us-east-2.compute.amazonaws.com", //SSH Host
         port: 22,
         username:"ec2-user",
         privateKey: fs.readFileSync(path.join(__dirname,'key1_RDS.pem'))
 }
+
+//Load Balancer: https://www.youtube.com/watch?v=0KIRNTbWf-4
+
 const forwardConfig = {
-    srcHost: '3.137.41.108', // any valid address
+    srcHost: 'dbsemi1.cguv4wtarweb.us-east-2.rds.amazonaws.com', // any valid address
     srcPort: 3306, // any valid port
     dstHost: dbServer.host, // destination database
     dstPort: dbServer.port // destination port

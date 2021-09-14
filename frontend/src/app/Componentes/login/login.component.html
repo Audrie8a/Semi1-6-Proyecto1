@@ -37,14 +37,14 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
-                                        <input [(ngModel)]="Usr" name="Usr" type="text" class="form-control" placeholder="username">
+                                        <input [(ngModel)]="Usuario" name="Usuario" type="text" class="form-control" placeholder="username">
 
                                     </div>
                                     <div class="input-group form-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                                         </div>
-                                        <input type="password" class="form-control" placeholder="password">
+                                        <input [(ngModel)]="Passwords" name="Passwords" type="password" class="form-control" placeholder="password">
                                     </div>
                                     <div class="form-group">
                                         <input (click)="Login()" type="submit" value="Login" class="btn float-right login_btn">
@@ -61,21 +61,27 @@
 
                                 <form>
                                     <label> Usuario</label>
-                                    <input  name="Usr" placeholder="Usuario" type="text"
+                                    <input  [(ngModel)]="Usr" name="Usr" placeholder="Usuario" type="text"
                                         class="form-control">
                                     <label> Nombre</label>
-                                    <input  name="Nombre" placeholder="Name" type="text"
+                                    <input  [(ngModel)]="Nombre" name="Nombre" placeholder="Name" type="text"
                                         class="form-control">
                                     <label> Contraseña</label>
-                                    <input  name="Pass" placeholder="Password" type="text"
+                                     <input  [(ngModel)]="Correo" name="Correo" placeholder="Name" type="text"
+                                        class="form-control">
+                                    <label> Contraseña</label>
+                                    <input  [(ngModel)]="Pass" name="Pass" placeholder="Password" type="text"
                                         class="form-control">
                                     <label> Repetir Contraseña</label>
-                                    <input name="Pass2" placeholder="Repetir Password" type="text"
+                                    <input [(ngModel)]="Pass2" name="Pass2" placeholder="Repetir Password" type="text"
                                         class="form-control">
                                     <label> Foto</label>
-                                    <input  id="custom-file-input" type="file"
-                                        name="Foto">
-                                    <input type="submit" value="Registro" class="registro_btn">
+                                    <input  
+                                    id="custom-file-input" type="file"
+                                    accept="image/jpeg,image/png"
+                                    #fileInput [(ngModel)]="Foto"
+                                    name="Foto">
+                                    <input type="submit" value="Registro"(click)="Registrar()" class="registro_btn">
                                     
                                 </form>
 

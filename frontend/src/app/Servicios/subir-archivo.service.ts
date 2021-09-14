@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { SubirArchivoComponent } from '../Componentes/subir-archivo/subir-archivo.component';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-  })
-};
-
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-
 export class SubirArchivoService {
 
-  constructor(private http: HttpClient) { }
-  API_URI = 'http://localhost:3000';
+  url:string="http://localhost:3000/";//"bL-475949248.us-east-2.elb.amazonaws.com:3000/"
+  constructor(private httpClient: HttpClient) { }
 
-  public setArchivo(request: SubirArchivoComponent){
-    return this.http.post(`${this.API_URI}/nuevoArchivo`, request, httpOptions);
+  
+
+  CargarImagen( id:string, foto: string ){
+    const ruta = this.url+"subirfoto";
+    const data= {id,foto};
+    return this.httpClient.post(ruta,data).toPromise();
+
+  }
+
+  verificar(id:string | null, contraAct:string){
+    const ruta = this.url+"Inicio/verifica";
+    const data = {id, contraAct};
+    return this.httpClient.post(ruta, data).toPromise();
   }
 }

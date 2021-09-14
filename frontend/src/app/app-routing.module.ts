@@ -9,6 +9,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'Home',
+    component: LoginComponent
+  },
+  {
     path: 'User/:id',
     component: PrincipalComponent
   }

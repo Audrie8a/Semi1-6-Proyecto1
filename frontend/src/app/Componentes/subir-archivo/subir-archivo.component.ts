@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser'; 
 import { SubirArchivoService } from 'src/app/Servicios/subir-archivo.service';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-subir-archivo',
@@ -9,31 +9,86 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./subir-archivo.component.css']
 })
 export class SubirArchivoComponent implements OnInit {
+  Foto: string = ''; //nombre del archivo
+  idUsuarioGlobal:string|null='';
 
-  constructor(private ArchivoService: SubirArchivoService, private http:HttpClient, public ruta: Router) { }
+  base64: string="Base64...";
+  fileSelected?:Blob;
+  imageUrl?:string;
 
-  public subir: any = {
-    nombre: "",
-    archivo: "",
-    estado: "" ,
-    dueño: ""
-  }
-  public id: string = "1";//este es un ejemplo de id, pero hay que jalar el id del usuario con el que se ingreso
+  
+  archivo: string = '';
+  estado: string = ''; //1 es publico - 0 es privado
+  contra: string = ''; 
+    
+  @ViewChild('fileInput',{static:false}) fileInput!: ElementRef;  
+  constructor(private sant:DomSanitizer,
+    public subirArchivoService:SubirArchivoService ,
+    public _activatedRoute: ActivatedRoute,
+    public _router: Router) { }
+
   ngOnInit(): void {
-    console.log('hollllllaaaaaaa');
+    let usuario=this._activatedRoute.snapshot.paramMap.get("id");
+    this.idUsuarioGlobal=usuario;
   }
 
-  probar(){
-    this.subir.dueño = "1";
-    this.subir.archivo = "probando";
-    this.ArchivoService.setArchivo(this.subir).subscribe(
-        res => {
-          console.log(res);
-          alert('Felicidades');
-        },
-        error => console.error(error)
-      );
-    console.log(this.subir.estado+"-------"+this.subir.nombre);
+  async Cargar(){
+    //this.onFileUpload();
+    let correct = await this.subirArchivoService.verificar(this.idUsuarioGlobal, this.contra);
+    let json=JSON.stringify(correct)
+    let obj= JSON.parse(json)
+    if(correct == "false"){
+      alert('esa no es tu contraseña >:(');//incertar, ya puedo verificar si la contra es correcta
+    } else {
+      
+    }
   }
 
+  onSelectNewFile():void{
+    this.fileSelected=this.fileInput.nativeElement.files[0];
+    if(this.fileSelected?.type=="application/pdf"){
+      this.imageUrl='../../../assets/Img/PDF.png';
+    }else if (this.fileSelected?.type=="text/plain"){
+      this.imageUrl='../../../assets/Img/Texto.png'
+    }else{
+      this.imageUrl=this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+    }
+    
+  }
+
+  onFileUpload(){    
+    this.fileSelected= this.fileInput.nativeElement.files[0];
+    const imageBlob=this.fileInput.nativeElement.files[0];
+    this.imageUrl=this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+    
+    
+    
+    this.convertFileToBase64();
+    
+    if (this.base64!="Base64..."){
+      alert("Subiendo Imagen!");
+      let arryaAux=this.base64.split(",",2)
+      this.base64=arryaAux[1];
+      if(this.fileSelected?.type=="application/pdf"){
+        //Colocar metodo pdf
+      }else if (this.fileSelected?.type=="text/plain"){
+        //Colocar metodo texto
+      }else{
+        this.subirArchivoService.CargarImagen("Archivo",this.base64);
+      }
+      
+    }
+        
+  }
+
+  
+  convertFileToBase64(){
+    let reader= new FileReader();
+    reader.readAsDataURL(this.fileSelected as Blob);
+    reader.onloadend=()=>{
+      this.base64=reader.result as string;
+      
+    }   
+    
+  }
 }

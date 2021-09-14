@@ -1,53 +1,22 @@
-#formulario{
-    background-color: blue;
-    width: 250px;
-    height: 530px;
-    position: absolute;
-    left: 50%;
-    margin-left: -150px;
-    top: 10%;
-    margin-top: -50px;
+.container{
+    height: 100%;
+    width: 800px;
+    align-self:center;
+    align-content: center;
+    margin-top: auto;
+    margin-bottom: auto;    
+    background-color: rgba(0,0,0,0.5) !important;    
 }
-#silueta{
-    left: 50%;
-    margin-left: 13px;
-    margin-top: 10px;
+
+.form-group{
+    align-self: center;
+    align-items: center;
 }
-#nombArch{
-    width: 225px;
-    margin-left: 575px;
-}
-#Archivo{
-    width: 425px;
-    margin-left: 475px;
+.form-group label,input, button{
+    margin:10px;
+    display: block;
+    align-items: center;
 }
 #lista{
-    width: 225px;
-    margin-left: 575px;
-}
-#btnSubir{
-    margin-left: 625px;
-    background-color: skyblue;
-}
-#btnRegistro{
-    color: yellowgreen;
-    margin-left: 70px;
-}
-#btnRecuperar{
-    color: yellowgreen;
-    margin-left: 30px;
-}
-#cart{
-    background-color: blue;
-    height: 140px;
-    margin-left: 0px;
-    margin-top: 0px;
-}
-#btnRec{
-    color: yellow;
-    margin-left: 50px;
-}
-#btnCan{
-    color: yellow;
-    margin-left: 55px;
+    margin-left: 100px;
 }
