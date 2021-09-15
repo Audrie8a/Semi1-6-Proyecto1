@@ -91,8 +91,6 @@ export class SubirArchivoComponent implements OnInit {
       //alert(this.archivo+' antes de');
       this.subirArchivoService.CargarArchivo(this.archivo, this.base64, this.estado, this.idUsuarioGlobal, this.tipo);
       alert(this.archivo + '-' + this.base64 + '-' + this.estado + '-' + this.tipo + ' antes');
-      
-      
     }
 
   }

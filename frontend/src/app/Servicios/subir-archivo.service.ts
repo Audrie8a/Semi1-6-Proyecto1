@@ -25,8 +25,8 @@ export class SubirArchivoService {
   CargarArchivo(archivo:string, base64:string, estado:string, iduser:string | null, tipo:string){
     const ruta = this.url+"Inicio/subirFile";
     const data = {archivo, base64, estado, iduser, tipo}
-    console.log(data.base64);
-    //return this.httpClient.post(ruta, data).toPromise();
+    //console.log(data.base64);
+    return this.httpClient.post(ruta, data).toPromise();
   }
 
   verificar(id:string | null, contraAct:string){

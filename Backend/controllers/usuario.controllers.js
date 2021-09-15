@@ -196,14 +196,31 @@ function SubirArchivo(Archivo, idArchivo, tipo){
         var nombrei = "files/" + Archivo +uuid()+tipo;
         //se convierte la base64 a bytes
         let buff = new Buffer.from(idArchivo, 'base64');
-    
+        
         const params = {
-        Bucket: "appweb-6p1",
-        Key: nombrei,
-        Body: buff,
-        ContentType: "image",
-        ACL: 'public-read'
+            Bucket: "",
+            Key: "",
+            Body: buff,
+            ContentType: "",
+            ACL: ''
         };
+        if(tipo == ".pdf"){
+            params = {
+                Bucket: "appweb-6p1",
+                Key: nombrei,
+                Body: buff,
+                ACL: 'public-read'
+            };
+        } else {
+            params = {
+                Bucket: "appweb-6p1",
+                Key: nombrei,
+                Body: buff,
+                ContentType: "image",
+                ACL: 'public-read'
+            };
+        }
+        
         putResult = s3.putObject(params).promise();
         return nombrei;
     } catch (error) {
