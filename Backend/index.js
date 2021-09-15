@@ -44,7 +44,25 @@ app.post('/subirfoto', function (req, res) {
     ContentType: "image",
     ACL: 'public-read'
   };
-  const putResult = s3.putObject(params).promise();
+  const putResult = s3.deleteObject(params).promise();
+  res.json({ mensaje: putResult })
+  //console.log(id,foto)
+
+
+
+});
+app.post('/eliminar', function (req, res) {
+
+  var id = req.body.id;
+  //carpeta y nombre que quieran darle a la imagen
+
+  var nombrei = id;
+  //se convierte la base64 a bytes
+  const params = {
+    Bucket: "appweb-6p1",
+    Key: nombrei
+  };
+  const putResult = s3.deleteObject(params).promise();
   res.json({ mensaje: putResult })
   //console.log(id,foto)
 

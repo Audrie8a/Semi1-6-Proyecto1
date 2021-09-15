@@ -65,7 +65,7 @@ export class SubirArchivoComponent implements OnInit {
       this.base64=arryaAux[1];
       if(this.fileSelected?.type=="application/pdf"){
         //Colocar metodo pdf
-        this.subirArchivoService.CargarPdf("ArchivoPdfAudrie",this.base64);
+        this.subirArchivoService.CargarPdf("AudrieAnnelisse64",this.base64);
       }else if (this.fileSelected?.type=="text/plain"){
         //Colocar metodo texto
       }else{
