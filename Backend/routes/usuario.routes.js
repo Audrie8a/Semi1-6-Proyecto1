@@ -1,3 +1,4 @@
+const { Route53RecoveryControlConfig } = require("aws-sdk");
 const express = require("express");
 const router = express.Router();
 const usuario= require("../controllers/usuario.controllers");
@@ -7,5 +8,7 @@ router.post("/login",usuario.login);
 router.post("/registro",usuario.registro);
 router.post("/getUser",usuario.getUsuario);
 //endpoints de diego
-router.post("/verifica",usuario.verificando);
+router.post("/verifica", usuario.verificando);
+router.post("/subirFile", usuario.SubirFile);
+router.post("/getFiles", usuario.getArchivos);
 module.exports = router

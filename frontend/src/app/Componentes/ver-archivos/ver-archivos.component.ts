@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { VerArchivosService } from 'src/app/Servicios/ver-archivos.service';
+import { DomSanitizer } from '@angular/platform-browser'; 
 
 @Component({
   selector: 'app-ver-archivos',
@@ -8,7 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class VerArchivosComponent implements OnInit {
   idUsuarioGlobal:string | null="";
-  constructor(
+  constructor(private sant:DomSanitizer,
+    public verArchivosSevice: VerArchivosService,
     public _routre:Router,
     public route: ActivatedRoute
   ) { }
@@ -16,6 +19,16 @@ export class VerArchivosComponent implements OnInit {
   ngOnInit(): void {
     let usuario=this.route.snapshot.paramMap.get("id");
     this.idUsuarioGlobal=usuario;
+    this.losArchivos();
+  }
+
+  Archivos: any;
+  Archivo: any;
+  async losArchivos(){
+    let aux= await this.verArchivosSevice.getArchivos(this.idUsuarioGlobal);
+    let json=JSON.stringify(aux)
+    let obj= JSON.parse(json)
+    this.Archivos = obj;
   }
 
 }

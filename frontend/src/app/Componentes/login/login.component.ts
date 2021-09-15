@@ -91,9 +91,7 @@ export class LoginComponent implements OnInit {
     reader.readAsDataURL(this.fileSelected as Blob);
     reader.onloadend=()=>{
       this.base64=reader.result as string;
-      
     }   
-    
   }
     borrarRegistro(){
       this.Usuario='';

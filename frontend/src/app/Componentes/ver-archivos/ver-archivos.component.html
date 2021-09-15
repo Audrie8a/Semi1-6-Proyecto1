@@ -1,1 +1,25 @@
 <p>ver-archivos works!</p>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Dueño</th>
+        <th scope="col">Nombre Imagen</th>
+        <th scope="col">Imagen</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-active" *ngFor="let Archivo of Archivos">
+        <td>
+          {{Archivo.nombre}}
+        </td>
+        <td>
+          {{Archivo.nombreArch}}
+        </td>
+        <td>    
+            <a href="{{Archivo.Arch}}" title="abrir">
+                <img [src]="Archivo.Arch"  width="25%" alt="{{Archivo.Arch}}" >
+            </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
