@@ -11,4 +11,7 @@ router.post("/getUser",usuario.getUsuario);
 router.post("/verifica", usuario.verificando);
 router.post("/subirFile", usuario.SubirFile);
 router.post("/getFiles", usuario.getArchivos);
+router.post("/getMisFiles", usuario.getMisArchivos);
+router.post("/Eliminar", usuario.EliminarFile);
+router.post("/editFile", usuario.EditFile);
 module.exports = router

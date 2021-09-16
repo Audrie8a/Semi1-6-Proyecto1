@@ -1,1 +1,42 @@
 <p>eliminar-archivo works!</p>
+
+<div *ngIf="verif == 1" id="cancel">
+    <br>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" [(ngModel)]="cont">
+    <br>
+    <button type="button" id="btnConf" class="btn btn-primary btn-lg" (click)="delete(fileId, fileRute)">Confirmar</button>
+    <br>
+    <button type="button" id="btnCanc" class="btn btn-primary btn-lg" (click)="cancelar()">Cancelar</button>
+</div>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Datos</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-active" *ngFor="let MiArchivo of MisArchivos">
+        <td>
+            {{MiArchivo.nombreArch}}
+            <br>
+            <div *ngIf="MiArchivo.estado == 1">
+                <label>Estado: Publico</label>
+            </div>
+            <div *ngIf="MiArchivo.estado == 0">
+                <label>Estado: Privado</label>
+            </div>
+        </td>
+        <td>    
+            <a href="{{MiArchivo.Arch}}" title="abrir">
+                <img [src]="MiArchivo.Arch"  width="25%" alt="{{MiArchivo.Arch}}" >
+            </a>
+        </td>
+        <td>
+            <button type="button" id="btnEliminar" class="btn btn-primary btn-lg" (click)="borrar(MiArchivo.idArchivo, MiArchivo.Arch)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

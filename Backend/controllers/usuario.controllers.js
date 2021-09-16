@@ -190,38 +190,115 @@ exports.getArchivos =async(req,res)=>{
     }
 }
 
+exports.getMisArchivos =async(req,res)=>{
+    try {
+        var idUser = req.body.iduser;
+        let sql = `select b.idArchivo, b.nombreArch, b.estado, b.Arch from usuario as a, archivo as b
+            where a.idUser = b.idUsu and a.idUser = ${idUser}`
+       
+        const conn = bd.SSHConnection.then(conn => {
+           //hacemos la query normal.
+           
+            conn.query(sql, function (err, result) {
+                if (err) throw err;
+                
+                if(result.length!=0){
+                        for(let n = 0; n<result.length; n++){
+                            result[n].Arch="https://appweb-6p1.s3.us-east-2.amazonaws.com/"+result[n].Arch
+                        }
+                        return res.json(result);                   
+                }else{
+                    return res.json("false");
+                }                
+            });
+        })
+    } catch (error) {
+        console.log("Error al obtener MIS archivos => ", error)
+        res.json("error")
+    }
+}
+
+exports.EliminarFile = async(req, res) => {
+    try {
+        var idUser = req.body.iduser;
+        var nombrei = req.body.filee;
+        console.log(idUser + ' ----------- ' + nombrei);
+        let sql = `delete from archivo where idArchivo = ${idUser} `
+
+        console.log("---------debio borrarse");
+         const conn = bd.SSHConnection.then(conn => {
+            conn.query(sql, function (err, result) {
+                if (err) throw err;
+                
+                res.json("Eliminado correctamente");             
+            });
+            const params = {
+                Bucket: "appweb-6p1",
+                Key: nombrei
+            };
+            const putResult = s3.deleteObject(params).promise();
+        }); 
+        const params1 = {
+            Bucket: "appweb-6p1",
+            Key: nombrei
+        };
+        const putResult1 = s3.deleteObject(params1).promise();
+    } catch (error) {
+        console.log("Error al Elimianr => ", error)
+        res.json("error")
+    }
+}
+
+exports.EditFile = async(req, res) => {
+    var idUser = req.body.iduser
+    var estado = req.body.estado;
+    let sql = `UPDATE archivo SET estado=${estado} WHERE idArchivo=${idUser}`
+    
+    const conn = bd.SSHConnection.then(conn => {
+        //hacemos la query normal.
+        conn.query(sql, function (err, result) {
+            if (err) throw err;
+            //console.log(idUser + ' - ' + hash1 + ' - ' + result[0].contra + ' - ' + contra);
+            return res.json(result[0]);       
+        });
+    });
+}
+
 //funciones
+
+function borrarFile(fileUrl){
+    try {
+        
+        return putResult;
+    } catch (error) {
+        return "false";
+    }
+}
+
 function SubirArchivo(Archivo, idArchivo, tipo){
     try {
         var nombrei = "files/" + Archivo +uuid()+tipo;
         //se convierte la base64 a bytes
         let buff = new Buffer.from(idArchivo, 'base64');
         
-        const params = {
-            Bucket: "",
-            Key: "",
-            Body: buff,
-            ContentType: "",
-            ACL: ''
-        };
         if(tipo == ".pdf"){
-            params = {
+            const params1 = {
                 Bucket: "appweb-6p1",
                 Key: nombrei,
                 Body: buff,
                 ACL: 'public-read'
             };
+            putResult = s3.putObject(params1).promise();
         } else {
-            params = {
+            const params2 = {
                 Bucket: "appweb-6p1",
                 Key: nombrei,
                 Body: buff,
                 ContentType: "image",
                 ACL: 'public-read'
             };
+            putResult = s3.putObject(params2).promise();
         }
-        
-        putResult = s3.putObject(params).promise();
         return nombrei;
     } catch (error) {
         return "error";
