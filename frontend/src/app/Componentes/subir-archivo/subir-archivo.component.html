@@ -12,12 +12,16 @@
             name="Foto"
             (change)="onSelectNewFile()">
         </div>
-
-
-        <label class="form-group">Nombre Archivo</label>
-        <input class="form-group" placeholder="Nombre Archivo">
-        <label class="form-group">Contraseña</label>
-        <input class="form-group" type="password" placeholder="Contraseña">
-        <button class="form-group" (click)="Cargar()">Cargar</button>
+        <input name="archivo" [(ngModel)]="archivo" class="form-group" placeholder="Nombre Archivo" >
+        <select id="lista" name="lista" class="form-group" [(ngModel)]="estado">
+            <option value="1">  
+                Publico
+            </option>
+            <option value="0">  
+                Privado
+            </option> 
+        </select>
+        <input name="contra" [(ngModel)]="contra" class="form-group" type="password" placeholder="Contraseña">
+        <input type="submit" value="Cargar"(click)="Cargar()" class="form-group">
     </form>
 </div>

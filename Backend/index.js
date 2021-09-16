@@ -51,7 +51,7 @@ app.post('/subirfoto', function (req, res) {
 
 
 });
-app.post('/eliminar', function (req, res) {
+app.post('/eliminar2', function (req, res) {
 
   var id = req.body.id;
   //carpeta y nombre que quieran darle a la imagen
@@ -70,8 +70,10 @@ app.post('/eliminar', function (req, res) {
 
 });
 
+
+
 //subir pdf en s3
-app.post('/subirfile', function (req, res) {
+app.post('/subirfile2', function (req, res) {
 
   var nombre = req.body.nombre;
   var pdf = req.body.pdf;  //base 64
