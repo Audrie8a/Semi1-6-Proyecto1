@@ -11,7 +11,11 @@
 <p align="center"><img src="./images/USAC_Logo.png" width="300" height="300"/></p>
 
 <br/>
+Audrie Annelisse del Cid Ochoa 201801263<br/>
+Diego Alejandro Vasquez
 
+# **Link acceso pagina web S3**
+https://archivos-6p1.s3.us-east-2.amazonaws.com/index.html
 
 # **Objetivos del Manual**
 
@@ -245,4 +249,6 @@ Se crearon 2 Bucket uno para el alamacenamiento de
 
 # **Conclusiones**
 
--
+- Para la conexión de la arquitectura se aplicaron ciertas mezclas de los conocimientos adquiridos ya que en algunos casos para la conexión de estos se necesitaban de más configuraciones referentes a la seguridad, la cuál pudimos tomar ideas de otras configuraciones de los ejemplos vistos en clase.
+- Existen diversas opciones para la utilización de un servicio. En este proyecto nos limitamos al uso de las que se encuentran en la capa gratuita.
+- Se implementaron las tecnologías mencionadas anteriormente, debido a que se buscaba la creación de un sitio web que cumpliera con ciertas medidas de seguridad respecto al acceso de los datos.
